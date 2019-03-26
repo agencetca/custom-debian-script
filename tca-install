@@ -2,7 +2,7 @@
 
 #TODO : apt-get install pm-utils and change acpi button behaviour by auto adding sleep.sh containing pm-suspend (done on elianecomputer)
 #TODO : may have to sed in /network/interface to eliminate eventual previous config of eth0 and co, otherwise network manager wont work
-
+#TODO : replace "main" with "main contrib non-free" in apt/source.list
 PACKAGES=$1
 
 INSTALLATION=".installation"
