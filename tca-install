@@ -116,7 +116,7 @@ if echo $PACKAGES|grep windows > /dev/null 2>&1; then
 		if [[ $REPLY =~ ^[Yy]$ ]]
 		then
 			NUMLOCK=$(which numlockx)
-			echo "greeter-setup-script=$NUMLOCK on" >> /etc/lightdm/lightdm.conf
+			echo "greeter-setup-script=$NUMLOCK on" | sudo tee --append /etc/lightdm/lightdm.conf
 			#echo "numlockx &" >> ~/.config/openbox/autostart
 		fi
 
