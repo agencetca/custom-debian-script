@@ -3,7 +3,6 @@
 #TODO : apt-get install pm-utils and change acpi button behaviour by auto adding sleep.sh containing pm-suspend (done on elianecomputer)
 #TODO : may have to sed in /network/interface to eliminate eventual previous config of eth0 and co, otherwise network manager wont work
 
-#IMPORTANT : to install windows template use "./tca-install windows" as a user (2nd part of the installation)
 PACKAGES=$1
 
 INSTALLATION=".installation"
@@ -59,7 +58,7 @@ if [ `whoami` == "root" ]; then
 
 	cp $CURRENT_LOC/$THISSCRIPT /home/$USER/$INSTALLATION
 	chown -R $USER:$USER /home/$USER/$INSTALLATION
-	echo -e "Everything is fine. Please exec cd ~/$INSTALLATION && ./$THISSCRIPT"
+	echo -e "Everything is fine. Please exec cd ~/$INSTALLATION && ./$THISSCRIPT [windows]"
 	su - $USER
 	exit 0
 fi
