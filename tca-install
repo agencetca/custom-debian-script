@@ -26,7 +26,7 @@ if [ `whoami` == "root" ]; then
 	apt-get install -y firmware-iwlwifi firmware-realtek
 
 	#Core
-	apt-get install -y sudo wget zip unzip vim openssh-server glances clipit gedit evince scrot shutter xarchiver alsamixergui preload wine cups printer-drivers* talkd talk numlockx $OPTIONAL &&
+	apt-get install -y sudo ntp wget zip unzip vim openssh-server glances clipit gedit evince scrot shutter xarchiver alsamixergui preload wine cups printer-drivers* talkd talk numlockx $OPTIONAL &&
 	
 	touch /etc/modprobe.d/blacklist.conf
 	if ! grep -q pcspkr /etc/modprobe.d/blacklist.conf; then
