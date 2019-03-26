@@ -3,6 +3,7 @@
 #TODO : apt-get install pm-utils and change acpi button behaviour by auto adding sleep.sh containing pm-suspend (done on elianecomputer)
 #TODO : may have to sed in /network/interface to eliminate eventual previous config of eth0 and co, otherwise network manager wont work
 #TODO : replace "main" with "main contrib non-free" in apt/source.list
+
 PACKAGES=$1
 
 INSTALLATION=".installation"
@@ -13,7 +14,7 @@ THISSCRIPT="tca-install"
 if [ `whoami` == "root" ]; then
  
 	#Optional
-	OPTIONAL="recoll gimp libreoffice libreoffice-gtk git lxterminal $PACKAGES"
+	OPTIONAL="recoll gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr $PACKAGES"
 	if echo $PACKAGES|grep windows > /dev/null 2>&1; then
 		echo "windows can't be installed as root. Wait for the next part of installation (user side)"
 	fi
