@@ -14,7 +14,7 @@ THISSCRIPT="tca-install"
 if [ `whoami` == "root" ]; then
  
 	#Optional
-	OPTIONAL="recoll gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr $PACKAGES"
+	OPTIONAL="recoll gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr wicd $PACKAGES"
 	if echo $PACKAGES|grep windows > /dev/null 2>&1; then
 		echo "windows can't be installed as root. Wait for the next part of installation (user side)"
 	fi
