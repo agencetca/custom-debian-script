@@ -1,0 +1,156 @@
+#!/bin/bash
+
+#TODO : apt-get install pm-utils and change acpi button behaviour by auto adding sleep.sh containing pm-suspend (done on elianecomputer)
+#TODO : may have to sed in /network/interface to eliminate eventual previous config of eth0 and co, otherwise network manager wont work
+
+//IMPORTANT : to install windows template use "./tca-install windows" as a user (2nd part of the installation)
+PACKAGES=$1
+
+INSTALLATION=".installation"
+WINATEFOLDER="WinAte-master"
+WINATESCRIPT="install.sh"
+THISSCRIPT="tca-install"
+
+if [ `whoami` == "root" ]; then
+ 
+	#Optional
+	OPTIONAL="recoll gimp libreoffice libreoffice-gtk git $PACKAGES"
+	if echo $PACKAGES|grep windows > /dev/null 2>&1; then
+		echo "windows can't be installed as root. Wait for the next part of installation (user side)"
+	fi
+
+	FRENCHTRAD="mythes-fr libreoffice-help-fr libreoffice-l10n-fr hunspell-fr hunspell-fr-modern"
+	FRENCHHELP="doc-linux-fr-pdf debian-faq-fr doc-linux-fr-text manpages-fr"
+	
+	#Wifi
+	apt-get install -y firmware-iwlwifi firmware-realtek
+
+	#Core
+	apt-get install -y sudo wget zip unzip vim openssh-server glances clipit gedit evince scrot shutter xarchiver alsamixergui preload wine cups printer-drivers* talkd talk numlockx $OPTIONAL &&
+	
+	touch /etc/modprobe.d/blacklist.conf
+	if ! grep -q pcspkr /etc/modprobe.d/blacklist.conf; then
+		echo "blacklist pcspkr" >> /etc/modprobe.d/blacklist.conf
+	fi
+
+	GRUBCURRENT=$(perl -ne 'print $1 if /.*GRUB_TIMEOUT=(.*).*/' /etc/default/grub)
+	if [ ! $GRUBCURRENT == 0 ]; then
+		sed -i "s/\(GRUB_TIMEOUT*= *\).*/\10/" /etc/default/grub &&
+		update-grub
+	fi
+	
+	echo -e "Which user you'll use?"
+	read USER
+
+	if ! grep -q "%sudo" /etc/sudoers; then
+		
+		groupadd -f sudo &&
+		echo "" >> /etc/sudoers &&
+		echo "# Allow members of group sudo to execute any command" >> /etc/sudoers &&
+		echo "%sudo   ALL=(ALL:ALL) ALL" >> /etc/sudoers &&
+		usermod -a $USER -G sudo
+	fi
+
+	CURRENT_LOC=`pwd` &&
+	
+	if [ ! -d /home/$USER/$INSTALLATION ]; then
+		mkdir /home/$USER/$INSTALLATION
+	fi
+
+	cp $CURRENT_LOC/$THISSCRIPT /home/$USER/$INSTALLATION
+	chown -R $USER:$USER /home/$USER/$INSTALLATION
+	echo -e "Everything is fine. Please exec cd ~/$INSTALLATION && ./$THISSCRIPT"
+	su - $USER
+	exit 0
+fi
+
+if [ ! -d ~/HELP ]; then
+	mkdir ~/HELP &&
+	wget -P ~/HELP ftp://ftp.linux-france.org/pub/article/cesar/Survie_Linux.pdf.gz &&
+	gunzip ~/HELP/Survie_Linux.pdf.gz &&
+	ln -s /usr/share/doc/HOWTO ~/HELP/HOWTO &&
+	sudo gunzip -r ~/HELP/HOWTO/ &&
+	ln -s /usr/share/doc/debian/FAQ ~/HELP/FAQ &&
+	sudo gunzip -r ~/HELP/FAQ/
+fi
+
+PROGRAMFOLD="Programs"
+
+if [ ! -d ~/$PROGRAMFOLD ]; then
+	mkdir ~/$PROGRAMFOLD
+fi
+
+if ! echo $PATH|grep ":/home/$USER/$PROGRAMFOLD" > /dev/null 2>&1; then
+	grep -v "PATH" ~/.bashrc > .bashrc
+	echo -e "export PATH=$PATH:/home/$USER/$PROGRAMFOLD" >> .bashrc &&
+	mv .bashrc ~/.bashrc &&
+	export PATH=$PATH:/home/$USER/$PROGRAMFOLD
+fi
+
+if [ ! -z $PACKAGES ]; then
+	sudo apt-get install -y $PACKAGES
+fi
+
+if [ -L /home/$USER/$PROGRAMFOLD/$THISSCRIPT ]; then
+	rm -f /home/$USER/$PROGRAMFOLD/$THISSCRIPT
+fi
+ln -s ~/$INSTALLATION/$THISSCRIPT /home/$USER/$PROGRAMFOLD/$THISSCRIPT
+
+sudo chown -R $USER:$USER ~ &&
+
+if echo $PACKAGES|grep windows > /dev/null 2>&1; then
+	if [ ! -d ~/$INSTALLATION/$WINATEFOLDER ]; then
+		echo "Windows template is being installed..."
+		sudo apt-get install -y lxde-core lxpanel lxsession lightdm pcmanfm compton openbox &&
+
+		read -p "Autologin? " -n 1 -r
+		echo    # (optional) move to a new line
+		if [[ $REPLY =~ ^[Yy]$ ]]
+		then
+		   sudo sed -i '/autologin-user=/c\autologin-user='$USER /etc/lightdm/lightdm.conf
+		else
+		   sudo sed -i '/autologin-user=/c\#autologin-user=' /etc/lightdm/lightdm.conf
+		fi
+
+		read -p "Autolock numpad? " -n 1 -r
+		echo    # (optional) move to a new line
+		if [[ $REPLY =~ ^[Yy]$ ]]
+		then
+			NUMLOCK=$(which numlockx)
+			echo "greeter-setup-script=$NUMLOCK on" >> /etc/lightdm/lightdm.conf
+			#echo "numlockx &" >> ~/.config/openbox/autostart
+		fi
+
+		cd ~/$INSTALLATION &&
+		wget http://github.com/nhermosilla14/WinAte/archive/master.zip &&
+		unzip master.zip &&
+		rm master.zip &&
+		cd $WINATEFOLDER &&
+		bash $WINATESCRIPT &&	
+		cd ~/$INSTALLATION &&
+		rm -rf $WINATEFOLDER &&
+		if grep scrot ~/.config/openbox/lxde-rc.xml > /dev/null 2>&1; then
+			sed -i 's/scrot/shutter -f/g' ~/.config/openbox/lxde-rc.xml
+		fi
+		echo "Done"
+		echo "Computer is going to reboot in 5 secondes"
+		sleep 5
+		sudo reboot
+		exit 0
+	fi
+fi
+
+#CONTINUE ONLY IF WINDOWS-LIGHTDM HAS NOT BEEN (RE)INSTALLED
+
+#NUMLOCK FOR GDM3
+if [ -f /etc/gdm3/Init/Default ]; then
+	echo "
+	  if [ -x /usr/bin/numlockx ] ; then
+	  /usr/bin/numlockx on
+	  fi
+	" >> /etc/gdm3/Init/Default
+fi
+
+sleep 1 &&
+echo "done" &&
+exit 0
