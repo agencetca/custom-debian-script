@@ -59,7 +59,7 @@ if [ `whoami` == "root" ]; then
 	cp $CURRENT_LOC/$THISSCRIPT /home/$USER/$INSTALLATION
 	chown -R $USER:$USER /home/$USER/$INSTALLATION
 	echo -e "Everything is fine. Please exec cd ~/$INSTALLATION && ./$THISSCRIPT [windows]"
-	su - $USER
+	exec su -l $USER
 	exit 0
 fi
 
