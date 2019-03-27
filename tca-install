@@ -14,7 +14,7 @@ THISSCRIPT="tca-install"
 if [ `whoami` == "root" ]; then
  
 	#Optional
-	OPTIONAL="recoll gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr wicd wicd-gtk hplip-gui xfce4-power-manager $PACKAGES"
+	OPTIONAL="gdebi recoll vlc gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr wicd wicd-gtk hplip-gui xfce4-power-manager $PACKAGES"
 	if echo $PACKAGES|grep windows > /dev/null 2>&1; then
 		echo "windows can't be installed as root. Wait for the next part of installation (user side)"
 	fi
@@ -27,6 +27,14 @@ if [ `whoami` == "root" ]; then
 
 	#Core
 	apt-get install -y sudo ntp wget zip unzip vim openssh-server glances clipit gedit evince scrot shutter xarchiver alsamixergui preload wine cups printer-drivers* talkd talk numlockx $OPTIONAL &&
+	
+	#Install Skype 64 bits
+	wget https://go.skype.com/skypeforlinux-64.deb && sudo gdebi --n skypeforlinux-64.deb
+	rm skypeforlinux-64.deb
+	
+	#Install dropbox 64 bits (might not be the latest)
+	wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb && sudo gdebi --n dropbox_2019.02.14_amd64.deb
+	rm dropbox_2019.02.14_amd64.deb
 	
 	touch /etc/modprobe.d/blacklist.conf
 	if ! grep -q pcspkr /etc/modprobe.d/blacklist.conf; then
