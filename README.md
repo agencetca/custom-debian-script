@@ -25,3 +25,8 @@ As user :
 [wait...]
 
 At the end the computer reboots.
+
+Add links to panel at the bottom of the page.
+Configure printer (need to plug it in).
+Configure Skype.
+Configure Dropbox.
