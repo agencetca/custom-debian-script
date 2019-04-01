@@ -32,3 +32,4 @@ Configure Skype.
 Configure Dropbox.
 Add adblock for chromium.
 Add adblock for firefox.
+Modify Gedit Preferences > Fonts & Colors > Change colorscheme (otherwise selection lacks visibility)
