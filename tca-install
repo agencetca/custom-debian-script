@@ -20,7 +20,7 @@ if [ `whoami` == "root" ]; then
 		echo "windows can't be installed as root. Wait for the next part of installation (user side)"
 	fi
 
-	FRENCHTRAD="mythes-fr libreoffice-help-fr libreoffice-l10n-fr hunspell-fr hunspell-fr-modern"
+	FRENCHTRAD="mythes-fr libreoffice-help-fr libreoffice-l10n-fr hunspell-fr hunspell-fr-modern hyphen-fr"
 	FRENCHHELP="doc-linux-fr-pdf debian-faq-fr doc-linux-fr-text manpages-fr"
 	
 	#Wifi
