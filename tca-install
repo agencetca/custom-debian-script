@@ -24,6 +24,7 @@ if [ `whoami` == "root" ]; then
 	FRENCHHELP="doc-linux-fr-pdf debian-faq-fr doc-linux-fr-text manpages-fr"
 	
 	#Search
+	#More here : https://www.lesbonscomptes.com/recoll/filters/filters.html
 	apt-get install -y recoll
 	apt-get install -y python-libxml2 python-libxslt1
 	rm /usr/share/recoll/examples/mimeconf && rm /usr/share/recoll/examples/mimeview && rm /usr/share/recoll/examples/mimemap
