@@ -34,3 +34,4 @@ Add adblock for chromium.
 Add adblock for firefox.
 Modify Gedit Preferences > Fonts & Colors > Change colorscheme (otherwise selection lacks visibility)
 Modify Nautilus Preferences to Detailed View
+Open Chromium, right click on upper bar, select : Use system title bar and border
