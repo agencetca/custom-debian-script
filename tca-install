@@ -15,7 +15,7 @@ THISSCRIPT="tca-install"
 if [ `whoami` == "root" ]; then
  
  	#Utils
-	apt-get -y install pm-utils
+	apt-get -y install pm-utils xinput
 	
 	#Optional
 	OPTIONAL="gdebi vlc gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr wicd wicd-gtk hplip-gui xfce4-power-manager $PACKAGES"
