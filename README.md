@@ -31,6 +31,7 @@ At the end the computer reboots.
 - Configure Skype.
 - Configure Dropbox.
 - Configure Recoll : files to index
+- OR install searchmonkey : https://sourceforge.net/projects/searchmonkey/files/latest/download
 - Add adblock for chromium.
 - Add adblock for firefox.
 - Modify Gedit Preferences > Fonts & Colors > Change colorscheme (otherwise selection lacks visibility)
