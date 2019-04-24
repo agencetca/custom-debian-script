@@ -15,7 +15,7 @@ THISSCRIPT="tca-install"
 if [ `whoami` == "root" ]; then
  
 	#Optional
-	OPTIONAL="gdebi recoll vlc gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr wicd wicd-gtk hplip-gui xfce4-power-manager $PACKAGES"
+	OPTIONAL="gdebi vlc gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr wicd wicd-gtk hplip-gui xfce4-power-manager $PACKAGES"
 	if echo $PACKAGES|grep windows > /dev/null 2>&1; then
 		echo "windows can't be installed as root. Wait for the next part of installation (user side)"
 	fi
@@ -23,15 +23,19 @@ if [ `whoami` == "root" ]; then
 	FRENCHTRAD="mythes-fr libreoffice-help-fr libreoffice-l10n-fr hunspell-fr hunspell-fr-modern hyphen-fr"
 	FRENCHHELP="doc-linux-fr-pdf debian-faq-fr doc-linux-fr-text manpages-fr"
 	
+	#Search
+	apt-get install -y recoll
+	apt-get install -y python-libxml2 python-libxslt1
+	cd /usr/share/recoll && rm mimeconf && rm mimeview && rm mimemap
+	
 	#Wifi
 	apt-get install -y firmware-iwlwifi firmware-realtek
 
 	#Core
 	apt-get install -y sudo default-jre ntp wget zip unzip vim openssh-server glances clipit gedit evince scrot shutter xarchiver alsamixergui preload wine cups printer-drivers* talkd talk numlockx $OPTIONAL &&
 	
-	#Resolve bugs
+	#Resolve some bugs
 	apt-get install -y libcanberra-gtk-module libcanberra-gtk3-module
-	apt-get install -y python-libxml2 python-libxslt1
 	
 	#Install Skype 64 bits
 	wget https://go.skype.com/skypeforlinux-64.deb && sudo gdebi --n skypeforlinux-64.deb
