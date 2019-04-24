@@ -105,12 +105,15 @@ if [ `whoami` == "root" ]; then
 	echo "auto lo" > /etc/network/interfaces
 	echo "iface lo inet loopback" >> /etc/network/interfaces
 	
+	#System information optional
+	apt-get install -y dmidecode glances
+	
 	#Security optional
 	apt-get install -y unattended-upgrades clamav nmap netcat tcpdump aircrack-ng pcaputils
 	#apt-get isntall wireshark //asking
 	
 	#Core
-	apt-get install -y sudo default-jre ntp wget zip unzip vim openssh-server glances clipit gedit evince scrot shutter xarchiver alsamixergui preload wine cups printer-drivers* talkd talk numlockx $OPTIONAL &&
+	apt-get install -y sudo default-jre ntp wget zip unzip vim openssh-server clipit gedit evince scrot shutter xarchiver alsamixergui preload wine cups printer-drivers* talkd talk numlockx $OPTIONAL &&
 	
 	#Resolve some bugs
 	apt-get install -y libcanberra-gtk-module libcanberra-gtk3-module
