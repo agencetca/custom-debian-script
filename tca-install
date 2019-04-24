@@ -26,7 +26,15 @@ if [ `whoami` == "root" ]; then
 	#Search
 	apt-get install -y recoll
 	apt-get install -y python-libxml2 python-libxslt1
-	cd /usr/share/recoll && rm mimeconf && rm mimeview && rm mimemap
+	rm /usr/share/recoll/examples/mimeconf && rm /usr/share/recoll/examples/mimeview && rm /usr/share/recoll/examples/mimemap
+	cd /usr/share/recoll/examples
+	wget https://raw.githubusercontent.com/agencetca/custom-debian-script/master/recoll/mimeconf
+	wget https://raw.githubusercontent.com/agencetca/custom-debian-script/master/recoll/mimeview
+	wget https://raw.githubusercontent.com/agencetca/custom-debian-script/master/recoll/mimemap
+	cd /usr/share/recoll/filters && rm rclxml 2> /dev/null
+	wget https://github.com/agencetca/custom-debian-script/blob/master/recoll/rclxml
+	chmod +x rclxml
+	cd
 	
 	#Wifi
 	apt-get install -y firmware-iwlwifi firmware-realtek
