@@ -23,18 +23,78 @@ if [ `whoami` == "root" ]; then
 	FRENCHTRAD="mythes-fr libreoffice-help-fr libreoffice-l10n-fr hunspell-fr hunspell-fr-modern hyphen-fr"
 	FRENCHHELP="doc-linux-fr-pdf debian-faq-fr doc-linux-fr-text manpages-fr"
 	
+	#Python-pip
+	apt-get install python-pip python3-pip
+	
 	#Search
 	#More here : https://www.lesbonscomptes.com/recoll/filters/filters.html
 	apt-get install -y recoll
 	apt-get install -y python-libxml2 python-libxslt1
+	pip install pylzma
+	pip3 install pylzma
+	pip install epub
+	pip3 install epub
+	pip install rarfile
+	pip3 install rarfile
 	rm /usr/share/recoll/examples/mimeconf && rm /usr/share/recoll/examples/mimeview && rm /usr/share/recoll/examples/mimemap
 	cd /usr/share/recoll/examples
 	wget https://raw.githubusercontent.com/agencetca/custom-debian-script/master/recoll/mimeconf
+	echo "application/pdf = execm rclmpdf" >> mimeconf
+	echo "application/vnd.ms-powerpoint = exec rclppt" >> mimeconf
+	echo "application/x-tar = execm rcltar" >> mimeconf
 	wget https://raw.githubusercontent.com/agencetca/custom-debian-script/master/recoll/mimeview
 	wget https://raw.githubusercontent.com/agencetca/custom-debian-script/master/recoll/mimemap
-	cd /usr/share/recoll/filters && rm rclxml 2> /dev/null
-	wget https://github.com/agencetca/custom-debian-script/blob/master/recoll/rclxml
+	cd /usr/share/recoll/filters	
+	rm rclpdf 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclpdf
+	chmod +x rclpdf
+	rm rclscribus 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclscribus
+	chmod +x rclscribus
+	rm rcl7z 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rcl7z
+	chmod +x rcl7z
+	rm rclmpdf 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclmpdf
+	chmod +x rclmpdf
+	rm rclsoff 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclsoff
+	chmod +x rclsoff
+	rm rclpurple 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclpurple
+	chmod +x rclpurple
+	rm rclppt 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclppt
+	chmod +x rclppt
+	rm ppt-dump.py 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/ppt-dump.py
+	chmod +x ppt-dump.py
+	rm msodump.zip 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/msodump.zip
+	rm rclepub 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclepub
+	chmod +x rclepub
+	rm rclchm 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclchm
+	chmod +x rclchm
+	rm rcltar 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rcltar
+	chmod +x rcltar
+	rm rclxml 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclxml
 	chmod +x rclxml
+	rm rcldia 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rcldia
+	chmod +x rcldia
+	rm rclokulnote 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclokulnote
+	chmod +x rclokulnote
+	rm rclrar 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclrar
+	chmod +x rclrar
+	rm rclzip 2> /dev/null
+	wget https://www.lesbonscomptes.com/recoll/filters/rclzip
+	chmod +x rclzip
 	cd
 	
 	#Wifi
