@@ -39,11 +39,12 @@ At the end the computer reboots.
 - Open Chromium, right click on upper bar, select : Use system title bar and border
 
 ##### Mouse speed:
-xinput --list --short
-select the id of the device
-xinput --list-props id_device
-look the code number between the parenthesis ()
-example : libinput Accel Speed (286):	0
-          xinput --set-prop 12 286 1 (1=activated, 0=deactivated)
-          #12 is the example id_device
+- xinput --list --short
+- select the id of the device
+- xinput --list-props id_device
+- look the code number between the parenthesis ()
+- example : 
+  - libinput Accel Speed (286):	0
+  - xinput --set-prop 12 286 1 (1=activated, 0=deactivated)
+  - #12 is the example id_device
 
