@@ -14,6 +14,9 @@ THISSCRIPT="tca-install"
 
 if [ `whoami` == "root" ]; then
  
+ 	#Utils
+	apt-get -y install pm-utils
+	
 	#Optional
 	OPTIONAL="gdebi vlc gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr wicd wicd-gtk hplip-gui xfce4-power-manager $PACKAGES"
 	if echo $PACKAGES|grep windows > /dev/null 2>&1; then
@@ -97,9 +100,11 @@ if [ `whoami` == "root" ]; then
 	chmod +x rclzip
 	cd
 	
-	#Wifi
+	#Wifi && network
 	apt-get install -y firmware-iwlwifi firmware-realtek
-
+	echo "auto lo" > /etc/network/interfaces
+	echo "iface lo inet loopback" >> /etc/network/interfaces
+	
 	#Core
 	apt-get install -y sudo default-jre ntp wget zip unzip vim openssh-server glances clipit gedit evince scrot shutter xarchiver alsamixergui preload wine cups printer-drivers* talkd talk numlockx $OPTIONAL &&
 	
