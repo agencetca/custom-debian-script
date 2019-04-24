@@ -30,6 +30,7 @@ Add links to panel at the bottom of the page.
 Configure printer (need to plug it in).
 Configure Skype.
 Configure Dropbox.
+Configure Recoll : files to index
 Add adblock for chromium.
 Add adblock for firefox.
 Modify Gedit Preferences > Fonts & Colors > Change colorscheme (otherwise selection lacks visibility)
