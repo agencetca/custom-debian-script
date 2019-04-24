@@ -26,13 +26,13 @@ As user :
 
 At the end the computer reboots.
 
-Add links to panel at the bottom of the page.
-Configure printer (need to plug it in).
-Configure Skype.
-Configure Dropbox.
-Configure Recoll : files to index
-Add adblock for chromium.
-Add adblock for firefox.
-Modify Gedit Preferences > Fonts & Colors > Change colorscheme (otherwise selection lacks visibility)
-Modify Nautilus Preferences to Detailed View
-Open Chromium, right click on upper bar, select : Use system title bar and border
+- Add links to panel at the bottom of the page.
+- Configure printer (need to plug it in).
+- Configure Skype.
+- Configure Dropbox.
+- Configure Recoll : files to index
+- Add adblock for chromium.
+- Add adblock for firefox.
+- Modify Gedit Preferences > Fonts & Colors > Change colorscheme (otherwise selection lacks visibility)
+- Modify Nautilus Preferences to Detailed View
+- Open Chromium, right click on upper bar, select : Use system title bar and border
