@@ -28,7 +28,7 @@ if [ `whoami` == "root" ]; then
 	cd /tmp
 	wget https://dl.google.com/widevine-cdm/1.4.8.1008-linux-x64.zip
 	unzip 1.4.8.1008-linux-x64.zip
-	sudo mkdir /usr/lib/chromium
+	sudo mkdir -p /usr/lib/chromium
 	sudo mv libwidevinecdm.so /usr/lib/chromium
 	sudo chmod 644 /usr/lib/chromium/libwidevinecdm.so
 
