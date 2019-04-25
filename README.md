@@ -67,5 +67,5 @@ At the end the computer reboots.
   - autolock session when sleep : yes (checked)
   
 ##### Try to add Flash
-apt-get install -y browser-plugin-freshplayer-pepperflash browser-plugin-gnash
+https://wiki.debian.org/FlashPlayer
   
