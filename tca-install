@@ -150,9 +150,6 @@ if [ `whoami` == "root" ]; then
 	wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb && sudo gdebi --n dropbox_2019.02.14_amd64.deb
 	rm dropbox_2019.02.14_amd64.deb
 	
-	#Flash
-	apt-get install -y browser-plugin-freshplayer-pepperflash browser-plugin-gnash
-	
 	touch /etc/modprobe.d/blacklist.conf
 	if ! grep -q pcspkr /etc/modprobe.d/blacklist.conf; then
 		echo "blacklist pcspkr" >> /etc/modprobe.d/blacklist.conf
