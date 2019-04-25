@@ -47,4 +47,21 @@ At the end the computer reboots.
   - libinput Accel Speed (286):	0
   - xinput --set-prop 12 286 1 (1=activated, 0=deactivated)
   - #12 is the example id_device
-
+  
+##### Computer Sleep and Lid behaviour:
+- Open préférénce > power
+- In Geneal :
+- Display notification icon
+- Power button : sleep
+- Lid Close (fermeture du couvercle) : 
+  - on battery : turn off screen
+  - on charge : turn off screen
+- In System:
+  - sleep
+    - on battery : never
+    - on charge : never
+  - if critical battery
+    - ask
+- Security
+  - autolock session when sleep : yes (checked)
+  
