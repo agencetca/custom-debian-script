@@ -26,6 +26,7 @@ As user :
 
 At the end the computer reboots.
 
+##### More:
 - Add links to panel at the bottom of the page.
 - Configure printer (need to plug it in).
 - Configure Skype.
@@ -38,7 +39,7 @@ At the end the computer reboots.
 - Modify Nautilus Preferences to Detailed View
 - Open Chromium, right click on upper bar, select : Use system title bar and border
 
-##### Mouse speed:
+##### Mouse speed:
 - xinput --list --short
 - select the id of the device
 - xinput --list-props id_device
