@@ -100,6 +100,30 @@ if [ `whoami` == "root" ]; then
 	chmod +x rclzip
 	cd
 	
+	#Splash page Plymouth
+	apt-get install -y  plymouth plymouth-themes libdrm-* mesa-utils firmware-linux-nonfree
+	cd /tmp && wget https://github.com/agencetca/custom-debian-script/blob/master/TCA.zip
+	unzip TCA.zip && rm TCA.zip
+	mv TCA /usr/share/plymouth/themes
+	cd /usr/share/plymouth
+	wget https://github.com/agencetca/custom-debian-script/blob/master/debian-logo.png
+	if [[ $(glxinfo | grep -i radeon) ]]; then
+		echo "drm" >> /etc/initramfs-tools/modules
+		echo "radeon modeset=1" >> /etc/initramfs-tools/modules
+	elif [[ $(glxinfo | grep -i nvidia) ]]; then
+		echo "drm" >> /etc/initramfs-tools/modules
+		echo "nouveau modeset=1" >> /etc/initramfs-tools/modules
+	else
+		echo "intel_agp" >> /etc/initramfs-tools/modules
+		echo "drm" >> /etc/initramfs-tools/modules
+		echo "i915 modeset=1" >> /etc/initramfs-tools/modules
+	fi
+	sed -i '/GRUB_CMDLINE_LINUX_DEFAULT*/c\GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"' /etc/default/grub
+	sed -i '/GRUB_GFXMODE*/c\GRUB_GFXMODE=640x480' /etc/default/grub
+	update-grub2
+	plymouth-set-default-theme TCA
+	update-initramfs -u
+	
 	#Wifi && network
 	apt-get install -y firmware-iwlwifi firmware-realtek
 	echo "auto lo" > /etc/network/interfaces
@@ -116,7 +140,7 @@ if [ `whoami` == "root" ]; then
 	apt-get install -y sudo default-jre ntp wget zip unzip vim openssh-server clipit gedit evince scrot shutter xarchiver alsamixergui preload wine cups printer-drivers* talkd talk numlockx $OPTIONAL &&
 	
 	#Resolve some bugs
-	apt-get install -y libcanberra-gtk-module libcanberra-gtk3-module accountservice plymouth plymouth-themes xserver-xephyr
+	apt-get install -y libcanberra-gtk-module libcanberra-gtk3-module accountservice xserver-xephyr
 	
 	#Install Skype 64 bits
 	wget https://go.skype.com/skypeforlinux-64.deb && sudo gdebi --n skypeforlinux-64.deb
