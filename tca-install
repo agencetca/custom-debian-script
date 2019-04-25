@@ -18,10 +18,19 @@ if [ `whoami` == "root" ]; then
 	apt-get -y install pm-utils xinput
 	
 	#Optional
-	OPTIONAL="chromium-widevine gdebi vlc gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr wicd wicd-gtk hplip-gui xfce4-power-manager $PACKAGES"
+	OPTIONAL="gdebi vlc gimp libreoffice libreoffice-gtk git lxterminal thunderbird chromium firefox-esr wicd wicd-gtk hplip-gui xfce4-power-manager $PACKAGES"
 	if echo $PACKAGES|grep windows > /dev/null 2>&1; then
 		echo "windows can't be installed as root. Wait for the next part of installation (user side)"
 	fi
+	
+	#Widevine
+	apt-get install -y chromium-widevine 
+	cd /tmp
+	wget https://dl.google.com/widevine-cdm/1.4.8.1008-linux-x64.zip
+	unzip 1.4.8.1008-linux-x64.zip
+	sudo mkdir /usr/lib/chromium
+	sudo mv libwidevinecdm.so /usr/lib/chromium
+	sudo chmod 644 /usr/lib/chromium/libwidevinecdm.so
 
 	FRENCHTRAD="mythes-fr libreoffice-help-fr libreoffice-l10n-fr hunspell-fr hunspell-fr-modern hyphen-fr"
 	FRENCHHELP="doc-linux-fr-pdf debian-faq-fr doc-linux-fr-text manpages-fr"
