@@ -209,6 +209,8 @@ if echo $PACKAGES|grep windows > /dev/null 2>&1; then
 		else
 		   sudo sed -i '/autologin-user=/c\#autologin-user=' /etc/lightdm/lightdm.conf
 		fi
+		
+		echo "greeter-hide-users=false" >> /etc/lightdm/lightdm.conf
 
 		read -p "Autolock numpad? " -n 1 -r
 		echo    # (optional) move to a new line
